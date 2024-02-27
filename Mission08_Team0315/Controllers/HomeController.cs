@@ -46,40 +46,45 @@ namespace Mission08_Team0315.Controllers
             return RedirectToAction("Quadrants");
         }
 
+        [HttpGet]
+        public IActionResult EditTask(int id)
+        {
+            ViewBag.task = _context.Tasks.FirstOrDefault(x => x.TaskId == id);
+
+            return RedirectToAction("AddTask");
+        }
+
+
+
+        [HttpPost]
         public async Task<IActionResult> EditTask(Task taskToUpdate)
         {
-            if (taskToUpdate == null || taskToUpdate.TaskId == 0)
+
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                // Check if the task exists in the database
+                var taskInDb = await _context.Tasks.FirstOrDefaultAsync(t => t.TaskId == taskToUpdate.TaskId);
+
+                if (taskInDb == null)
+                {
+                    // If the task doesn't exist, return NotFound or any other appropriate response
+                    return NotFound();
+                }
+
+                // Update the properties of the task in the database
+                taskInDb.TaskName = taskToUpdate.TaskName;
+                taskInDb.DueDate = taskToUpdate.DueDate;
+                taskInDb.Quadrant = taskToUpdate.Quadrant;
+                taskInDb.CategoryId = taskToUpdate.CategoryId;
+                taskInDb.IsCompleted = taskToUpdate.IsCompleted;
+
+                // Save the changes to the database
+                await _context.SaveChangesAsync();
+
+                // Redirect to the 'Quadrants' view or any other appropriate action
+                return RedirectToAction("Quadrants");
             }
 
-            var existingTask = await _context.Tasks.FirstOrDefaultAsync(t => t.TaskId == taskToUpdate.TaskId);
-
-            if (existingTask != null)
-            {
-                existingTask.TaskName = taskToUpdate.TaskName;
-                existingTask.DueDate = taskToUpdate.DueDate;
-                existingTask.Quadrant = taskToUpdate.Quadrant;
-                existingTask.CategoryId = taskToUpdate.CategoryId;
-                existingTask.IsCompleted = taskToUpdate.IsCompleted;
-
-                try
-                {
-                    _context.Update(existingTask);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!_context.Tasks.Any(t => t.TaskId == taskToUpdate.TaskId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-            }
 
             return RedirectToAction("Quadrants");
         }

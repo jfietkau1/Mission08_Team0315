@@ -4,8 +4,7 @@
 @{
 }
 
-<!--model List<Task>-->
-
+@model List<Mission08_Team0315.Models.Task>
 
 
 <style>
@@ -24,38 +23,35 @@
  </div>
 
 
-@*
+
     <h1>Quadrants</h1>
 
-   <div class="row">
-      <div class="col" id="q1">Quadrant 1</div>
-      <div class="col" id="q2">Quadrant 2</div>
-      <div class="w-100"></div>
-      <div class="col" id="q3">Quadrant 3</div>
-      <div class="col" id="q4">Quadrant 4</div>
-    </div> *@
-
-@foreach (var x in Model) // razor code to use model
+ <div class="container">
+     <div class="row">
+        <div class="col" id="q1">
+            <h3>Quadrant 1</h3>
+    @foreach (var x in Model) // razor code to use model
     {
-        if (@x.Quadrant == 1)
+        @if (@x.Quadrant == 1)
         {
-            <div class="col" id="q1">
-
-                <h3>Quadrant 1</h3>
                 <p>@x.TaskName</p>
 
                 <div class="task-buttons">
-                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Form" asp-route-id="@x.TaskId">Edit</a>
                     <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
                     <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
-                </div>
-            </div>
+                </div>        
         }
-        else if (@x.Quadrant == 2)
+    }
+        
+         <div/>
+ 
+         <div class="col" id="q2">
+            <h3>Quadrant 2</h3>
+    
+    @foreach (var x in Model){
+        @if (@x.Quadrant == 2)
         {
-            <div class="col" id="q2">
-
-                <h3>Quadrant 2</h3>
                 <p>@x.TaskName</p>
 
                 <div class="task-buttons">
@@ -64,37 +60,43 @@
                     <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
                 </div>
 
-            </div>
+        }
+    }
+        </div>
+        <div class="w-100"></div>
+        <div class="col" id="q3">
+            <h3>Quadrant 3</h3>
+        
+    @foreach (var x in Model){
+        @if (@x.Quadrant == 3)
+        {
+                <p>@x.TaskName</p>
+                <div class="task-buttons">
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
+                </div>
         
         }
-        else if (@x.Quadrant == 3)
-        {
-            <div class="col" id="q3">
+    }
+        </div>
 
-                <h3>Quadrant 3</h3>
+        <div class="col" id="q4">
+            <h3>Quadrant 4</h3>
+
+    @foreach (var x in Model){
+        @if (@x.Quadrant ==4)
+        {
+
                 <p>@x.TaskName</p>
                 <div class="task-buttons">
                     <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
                     <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
                     <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
                 </div>
-
-            </div>
-        
         }
-        else if (@x.Quadrant ==4)
-        {
-            <div class="col" id="q4">
+    }
+        </div>
 
-                <h3>Quadrant 4</h3>
-                <p>@x.TaskName</p>
-                <div class="task-buttons">
-                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
-                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
-                    <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
-                </div>
-
-            </div>
-        }
-}
-
+    </div>
+</div>

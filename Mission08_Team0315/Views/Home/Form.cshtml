@@ -25,13 +25,15 @@
                     <option value="4">Quadrant 4</option>
                 </select>
                 <label asp-for="CategoryId">Category</label>
+                @foreach (Category c in ViewBag.CategoryName)
                 <select>
-                    <option value="">Temp</option>
+                        <option value="@c.CategoryId">@c.CategoryId</option>
                 </select>
                 <label asp-for="IsCompleted">Is Completed?</label>
                 <select>
                     <option value="1">Yes</option>
                     <option value="0">No</option>
+                </select>
             </form>
         </div>
     </div>

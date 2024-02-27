@@ -1,0 +1,100 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!--model List<Task>-->
+
+
+
+<style>
+  .col {
+      border: 1px solid #ddd; /* Add border styling */
+      padding: 10px; /* Add padding for better visibility */
+       }
+
+  .task-buttons {
+        display: inline-block; /* Display the buttons in a line */
+  }
+ </style>
+
+ <div class="row">
+    <h1>Steven Covey's Time Management Matrix</h1>
+ </div>
+
+
+@*
+    <h1>Quadrants</h1>
+
+   <div class="row">
+      <div class="col" id="q1">Quadrant 1</div>
+      <div class="col" id="q2">Quadrant 2</div>
+      <div class="w-100"></div>
+      <div class="col" id="q3">Quadrant 3</div>
+      <div class="col" id="q4">Quadrant 4</div>
+    </div> *@
+
+@foreach (var x in Model) // razor code to use model
+    {
+        if (@x.Quadrant == 1)
+        {
+            <div class="col" id="q1">
+
+                <h3>Quadrant 1</h3>
+                <p>@x.TaskName</p>
+
+                <div class="task-buttons">
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
+                </div>
+            </div>
+        }
+        else if (@x.Quadrant == 2)
+        {
+            <div class="col" id="q2">
+
+                <h3>Quadrant 2</h3>
+                <p>@x.TaskName</p>
+
+                <div class="task-buttons">
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
+                </div>
+
+            </div>
+        
+        }
+        else if (@x.Quadrant == 3)
+        {
+            <div class="col" id="q3">
+
+                <h3>Quadrant 3</h3>
+                <p>@x.TaskName</p>
+                <div class="task-buttons">
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
+                </div>
+
+            </div>
+        
+        }
+        else if (@x.Quadrant ==4)
+        {
+            <div class="col" id="q4">
+
+                <h3>Quadrant 4</h3>
+                <p>@x.TaskName</p>
+                <div class="task-buttons">
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
+                </div>
+
+            </div>
+        }
+}
+

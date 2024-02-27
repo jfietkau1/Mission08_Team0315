@@ -6,14 +6,39 @@ namespace Mission08_Team0315.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly TaskContext _context;
+
+        public HomeController(TaskContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
-            return View();
+
+
+
+
+            return RedirectToAction("Quadrants");
         }
         public IActionResult Quadrants()
         {
-            return View();
+
+            var Tasks = _context.Tasks.ToList();
+
+
+
+            return View(Tasks);
         }
+
+        public IActionResult Completed()
+        {
+
+
+            return RedirectToAction("Quadrants");
+        }
+
+
 
     }
 }

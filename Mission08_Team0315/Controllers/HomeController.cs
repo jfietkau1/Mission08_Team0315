@@ -26,18 +26,33 @@ namespace Mission08_Team0315.Controllers
         public IActionResult Quadrants()
         {
 
-            var Tasks = _context.Tasks.ToList();
-
+            var Tasks = _context.Tasks.Where(x => x.IsCompleted == false).ToList();
 
 
             return View(Tasks);
         }
 
-        public IActionResult Completed()
+        public async Task<IActionResult> Completed(int id)
         {
+            // Find the task by ID
+            var taskToUpdate = await _context.Tasks.FirstOrDefaultAsync(t => t.TaskId == id);
 
+            if (taskToUpdate != null)
+            {
+                // Change the IsCompleted status to true
+                taskToUpdate.IsCompleted = true;
 
-            return RedirectToAction("Quadrants");
+                // Save the changes to the database
+                await _context.SaveChangesAsync();
+
+                // Redirect to the 'Quadrants' view or any other appropriate action
+                return RedirectToAction("Quadrants");
+            }
+            else
+            {
+                // If the task doesn't exist, return NotFound or any other appropriate response
+                return NotFound();
+            }
         }
         public IActionResult AddTask()
         {
@@ -50,12 +65,12 @@ namespace Mission08_Team0315.Controllers
         public IActionResult EditTask(int id)
         {
             ViewBag.task = _context.Tasks.FirstOrDefault(x => x.TaskId == id);
-
+            ViewBag.categories = _context.Categories.ToList();
             return RedirectToAction("AddTask");
         }
 
 
-
+        
         [HttpPost]
         public async Task<IActionResult> EditTask(Task taskToUpdate)
         {

@@ -25,15 +25,18 @@
                     <option value="4">Quadrant 4</option>
                 </select>
                 <label asp-for="CategoryId">Category</label>
-                @foreach (Category c in ViewBag.CategoryName)
-                <select>
+                @foreach (Category c in ViewBag.categories)
+                {
+                    <select>
                         <option value="@c.CategoryId">@c.CategoryId</option>
-                </select>
+                    </select>
+                }
                 <label asp-for="IsCompleted">Is Completed?</label>
                 <select>
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </select>
+                <button type="submit" asp-route-id="">Submit</button> @* Allows the form to be submitted*@
             </form>
         </div>
     </div>

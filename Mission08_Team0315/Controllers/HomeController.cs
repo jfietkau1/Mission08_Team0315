@@ -13,7 +13,7 @@ namespace Mission08_Team0315.Controllers
 
         public HomeController(ITaskRepository temp)
         {
-            _context = temp;
+            _repo = temp;
         }
         public IActionResult Index()
         {
@@ -26,7 +26,7 @@ namespace Mission08_Team0315.Controllers
         public IActionResult Quadrants()
         {
 
-            var Tasks = _context.Tasks.Where(x => x.IsCompleted == false).ToList();
+            var Tasks = _repo.Tasks.Where(x => x.IsCompleted == false).ToList();
 
 
             return View(Tasks);
@@ -35,7 +35,7 @@ namespace Mission08_Team0315.Controllers
         public async Task<IActionResult> Completed(int id)
         {
             // Find the task by ID
-            var taskToUpdate = await _context.Tasks.FirstOrDefaultAsync(t => t.TaskId == id);
+            var taskToUpdate = _repo.Tasks.FirstOrDefault(t => t.TaskId == id);
 
             if (taskToUpdate != null)
             {
@@ -43,7 +43,7 @@ namespace Mission08_Team0315.Controllers
                 taskToUpdate.IsCompleted = true;
 
                 // Save the changes to the database
-                await _context.SaveChangesAsync();
+                _repo.SaveChanges();
 
                 // Redirect to the 'Quadrants' view or any other appropriate action
                 return RedirectToAction("Quadrants");
@@ -61,12 +61,13 @@ namespace Mission08_Team0315.Controllers
             return RedirectToAction("Form");
         }
 
+
         [HttpGet]
         public IActionResult EditTask(int id)
         {
-            ViewBag.task = _context.Tasks.FirstOrDefault(x => x.TaskId == id);
-            ViewBag.categories = _context.Categories.ToList();
-            return RedirectToAction("AddTask");
+            ViewBag.task = _repo.Tasks.FirstOrDefault(x => x.TaskId == id);
+            ViewBag.categories = _repo.Categories.ToList();
+            return View("Form");
         }
 
 
@@ -78,7 +79,7 @@ namespace Mission08_Team0315.Controllers
             if (ModelState.IsValid)
             {
                 // Check if the task exists in the database
-                var taskInDb = await _context.Tasks.FirstOrDefaultAsync(t => t.TaskId == taskToUpdate.TaskId);
+                var taskInDb = _repo.Tasks.FirstOrDefault(t => t.TaskId == taskToUpdate.TaskId);
 
                 if (taskInDb == null)
                 {
@@ -94,7 +95,7 @@ namespace Mission08_Team0315.Controllers
                 taskInDb.IsCompleted = taskToUpdate.IsCompleted;
 
                 // Save the changes to the database
-                await _context.SaveChangesAsync();
+                _repo.SaveChangesAsync();
 
                 // Redirect to the 'Quadrants' view or any other appropriate action
                 return RedirectToAction("Quadrants");

@@ -9,11 +9,11 @@ namespace Mission08_Team0315.Controllers
     public class HomeController : Controller
     {
 
-        private readonly TaskContext _context;
+        private ITaskRepository _repo;
 
-        public HomeController(TaskContext context)
+        public HomeController(ITaskRepository temp)
         {
-            _context = context;
+            _context = temp;
         }
         public IActionResult Index()
         {
@@ -58,7 +58,7 @@ namespace Mission08_Team0315.Controllers
         {
 
 
-            return RedirectToAction("Quadrants");
+            return RedirectToAction("Form");
         }
 
         [HttpGet]

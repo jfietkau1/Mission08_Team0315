@@ -61,6 +61,15 @@ namespace Mission08_Team0315.Controllers
             return RedirectToAction("Form");
         }
 
+        public IActionResult Form(int id)
+        {
+            var task = _repo.Tasks.FirstOrDefault(x => x.TaskId == id);
+            ViewBag.categories = _repo.Categories.ToList();
+
+            return View(task);
+        }
+
+
 
         [HttpGet]
         public IActionResult EditTask(int id)

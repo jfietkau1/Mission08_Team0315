@@ -191,5 +191,17 @@ namespace Mission08_Team0315.Controllers
 
             return RedirectToAction("Quadrants");
         }
+
+
+
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _repo.DeleteTask(id);
+            _repo.SaveChanges();
+
+            return RedirectToAction("Quadrants");
+        }
     }
 }

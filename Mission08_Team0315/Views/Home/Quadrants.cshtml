@@ -38,9 +38,12 @@
 
                 <div class="task-buttons">
                     <a class="btn btn-info" asp-controller="Home" asp-action="Form" asp-route-id="@x.TaskId">Edit</a>
-                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    <form asp-controller="Home" asp-action="Delete" method="post" class="task-buttons">
+                        <input type="hidden" name="id" value="@x.TaskId" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                     <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
-                </div>        
+                </div>
         }
     }
         
@@ -55,8 +58,11 @@
                 <p>@x.TaskName</p>
 
                 <div class="task-buttons">
-                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
-                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Form" asp-route-id="@x.TaskId">Edit</a>
+                    <form asp-controller="Home" asp-action="Delete" method="post" class="task-buttons">
+                        <input type="hidden" name="id" value="@x.TaskId" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                     <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
                 </div>
 
@@ -72,8 +78,11 @@
         {
                 <p>@x.TaskName</p>
                 <div class="task-buttons">
-                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
-                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Form" asp-route-id="@x.TaskId">Edit</a>
+                    <form asp-controller="Home" asp-action="Delete" method="post" class="task-buttons">
+                        <input type="hidden" name="id" value="@x.TaskId" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                     <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
                 </div>
         
@@ -90,8 +99,11 @@
 
                 <p>@x.TaskName</p>
                 <div class="task-buttons">
-                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
-                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Form" asp-route-id="@x.TaskId">Edit</a>
+                    <form asp-controller="Home" asp-action="Delete" method="post" class="task-buttons">
+                        <input type="hidden" name="id" value="@x.TaskId" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                     <a class="btn btn-success" asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Mark Task as Completed</a>
                 </div>
         }

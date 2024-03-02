@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 namespace Mission08_Team0315.Models
+    //These set up the tables for the HomeController to usw
 {
     public class TaskContext : DbContext
     {

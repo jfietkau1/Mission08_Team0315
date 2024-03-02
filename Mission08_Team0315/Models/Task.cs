@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission08_Team0315.Models
+    //Makes the task table and the fields
 {
     public class Task
     {

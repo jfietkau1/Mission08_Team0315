@@ -9,7 +9,7 @@ namespace Mission08_Team0315.Controllers
     public class HomeController : Controller
     {
 
-        private ITaskRepository _repo;
+        private ITaskRepository _repo; //This creates an instance to access the tables
 
         public HomeController(ITaskRepository temp)
         {

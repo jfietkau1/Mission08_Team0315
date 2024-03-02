@@ -11,19 +11,15 @@ namespace Mission08_Team0315.Controllers
 
         private ITaskRepository _repo; //This creates an instance to access the tables
 
-        public HomeController(ITaskRepository temp)
+        public HomeController(ITaskRepository temp) //Constructor
         {
             _repo = temp;
         }
-        public IActionResult Index()
+        public IActionResult Index() //Sets up the home page to the quadrants
         {
-
-
-
-
             return RedirectToAction("Quadrants");
         }
-        public IActionResult Quadrants()
+        public IActionResult Quadrants() //Calls the quadrant's table and makes the webpage
         {
 
             var Tasks = _repo.Tasks.Where(x => x.IsCompleted == false).ToList();
@@ -55,14 +51,14 @@ namespace Mission08_Team0315.Controllers
             }
         }
         [HttpGet]
-        public IActionResult AddTask()
+        public IActionResult AddTask() //Opens a form to make a task
         {
 
 
             return RedirectToAction("Form");
         }
         [HttpPost]
-        public IActionResult AddTask(int id)
+        public IActionResult AddTask(int id) //Posts that task to the database
         {
 
 
@@ -71,7 +67,7 @@ namespace Mission08_Team0315.Controllers
 
 
         [HttpGet]
-        public IActionResult Form(int? id)
+        public IActionResult Form(int? id) //Editing a form
         {
             Task task = null; // Start with a null task.
 
@@ -91,7 +87,7 @@ namespace Mission08_Team0315.Controllers
             return View(task); // Pass the task (which could be null) to the view.
         }
         [HttpPost]
-        public IActionResult Form(Task task)
+        public IActionResult Form(Task task) //Posting her edit
         {
             if (task.TaskId != 0)
             {
@@ -150,7 +146,7 @@ namespace Mission08_Team0315.Controllers
 
 
         [HttpGet]
-        public IActionResult EditTask(int id)
+        public IActionResult EditTask(int id) //Editing a task
         {
             ViewBag.task = _repo.Tasks.FirstOrDefault(x => x.TaskId == id);
             ViewBag.categories = _repo.Categories.ToList();
@@ -160,7 +156,7 @@ namespace Mission08_Team0315.Controllers
 
         
         [HttpPost]
-        public async Task<IActionResult> EditTask(Task taskToUpdate)
+        public async Task<IActionResult> EditTask(Task taskToUpdate) //Editing a task
         {
 
             if (ModelState.IsValid)
@@ -196,7 +192,7 @@ namespace Mission08_Team0315.Controllers
 
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id) //Deleting a task
         {
             _repo.DeleteTask(id);
             _repo.SaveChanges();
